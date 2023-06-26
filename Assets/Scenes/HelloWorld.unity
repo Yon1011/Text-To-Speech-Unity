@@ -326,8 +326,8 @@ MonoBehaviour:
   inputField: {fileID: 1063444687}
   speakButton: {fileID: 1445837540}
   audioSource: {fileID: 547868382}
-  textHighlight: {fileID: 115746474}
-  textOutPut: {fileID: 115746474}
+  textHighlight: {fileID: 821508341}
+  textUnder: {fileID: 115746474}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,7 +819,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &821508336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,7 +921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IgnoreWhiteSpaces: 1
   StartOnEnable: 0
-  CharFadeDuration: 0.1
+  CharFadeDuration: 0.5
   CharLimiter: {fileID: 821508339}
   CharFader: {fileID: 821508340}
 --- !u!1 &1063444685

@@ -17,9 +17,8 @@ public class HelloWorld : MonoBehaviour
     public InputField inputField;
     public Button speakButton;
     public AudioSource audioSource;
-    public Text textHighlight;
-    public Text textOutPut;
-
+    public TextFader textHighlight;
+    public Text textUnder;
 
     // Replace with your own subscription key and service region (e.g., "westus").
     private const string SubscriptionKey = "7011758a5d704ce49c94708965505b33";
@@ -42,7 +41,7 @@ public class HelloWorld : MonoBehaviour
     private int currentIndex = 0;
     private double currentDuration = 0f;
     private double latency = 0f;
-    private float currentFillAWord = 0f;
+    private int currentFillAWord = 0;
     private int lastIndex = 0;
 
     public void ButtonClick()
@@ -58,7 +57,7 @@ public class HelloWorld : MonoBehaviour
         // Starts speech synthesis, and returns once the synthesis is started.
         using (var result = synthesizer.StartSpeakingTextAsync(inputField.text).Result)
         {
-            outputText.text =  inputField.text;
+            textUnder.text =  inputField.text;
             // Native playback is not supported on Unity yet (currently only supported on Windows/Linux Desktop).
             // Use the Unity API to play audio here as a short term solution.
             // Native playback support will be added in the future release.
@@ -107,10 +106,11 @@ public class HelloWorld : MonoBehaviour
             audioSource.Play();
             timeStart = DateTime.Now;
             lastIndex = 0;
-            currentFillAWord = 0f;
+            currentFillAWord = 0;
+            textHighlight.SetText(textUnder.text);
             if (wordList.Count > 0)
             {
-                currentDuration = wordList[wordList.Count - 1].Duration.TotalMilliseconds;
+                currentDuration = (int) ((wordList[currentIndex + 1].AudioOffset + 5000) / 10000) ;
             }
         }
 
@@ -124,7 +124,8 @@ public class HelloWorld : MonoBehaviour
             waitingForSpeak = false;
         }
     }
-
+    int audioOffset = 0;
+    int duration = 0;
     void Start()
     {
         if (outputText == null)
@@ -144,11 +145,12 @@ public class HelloWorld : MonoBehaviour
         else
         {
             // Continue with normal initialization, Text, InputField and Button objects are present.
-            inputField.text = "Once upon a time, there was a little mermaid named Ariel who lived under the sea with her father King Triton and her sisters.She loved to explore the ocean and collect human things that she found on the seafloor.";
+            inputField.text = "Once upon a time, there was a little mermaid named Ariel who lived under the sea with her father King Triton and her sisters. She loved to explore the ocean and collect human things that she found on the seafloor.";
             message = "Click button to synthesize speech";
             speakButton.onClick.AddListener(ButtonClick);
 
-            outputText.text =  inputField.text;
+            textUnder.text =  inputField.text;
+            textHighlight.SetText(textUnder.text);
 
             // Creates an instance of a speech config with specified subscription key and service region.
             speechConfig = SpeechConfig.FromSubscription(SubscriptionKey, Region);
@@ -172,7 +174,6 @@ public class HelloWorld : MonoBehaviour
             synthesizer.SynthesisStarted += (s, e) =>
             {
                 isStarted = true;
-                textHighlight.text = "";
                 currentTimeMS = 0;
                 currentIndex = 0;
                 Debug.Log("Start");
@@ -185,7 +186,7 @@ public class HelloWorld : MonoBehaviour
                 isStarted = false;
             };
 
-
+            
             synthesizer.WordBoundary += (s, e) =>{
               // Word, Punctuation, or Sentence
                 var str = $"Type: {e.BoundaryType}  AudioOffset: {(e.AudioOffset + 5000) / 10000}ms  Duration: {e.Duration.TotalMilliseconds} Text: \"{e.Text}\" TextOffset: {e.TextOffset} WordLength: ${e.WordLength}";
@@ -193,11 +194,17 @@ public class HelloWorld : MonoBehaviour
                 if (e.BoundaryType != SpeechSynthesisBoundaryType.Sentence)
                 {
                     wordList.Add(e);
+                    audioOffset = (int) ((e.AudioOffset + 5000) / 10000);
+                    duration += (int) e.Duration.TotalMilliseconds;
+                }
+                else
+                {
+                    Debug.Log(audioOffset + "  "+ duration);
+                    audioOffset = 0;
                 }
             };
         }
     }
-
     void Update()
     {
         lock (threadLocker)
@@ -224,17 +231,13 @@ public class HelloWorld : MonoBehaviour
                 currentTimeMS = endTime.Subtract(timeStart).TotalMilliseconds;
                 if (currentTimeMS > currentDuration)
                 {
-                    textHighlight.text += wordList[currentIndex].Text;
+                    currentFillAWord += (int) wordList[currentIndex].WordLength;
+                    textHighlight.SetNumberOfLetters(currentFillAWord);
                     if (currentIndex + 1 < wordList.Count)
                     {
-                        currentDuration += wordList[currentIndex + 1].Duration.TotalMilliseconds;
-                        if (wordList[currentIndex + 1].BoundaryType == SpeechSynthesisBoundaryType.Word)
-                        {
-                            textHighlight.text += " ";
-                        }
+                        currentDuration = (int) ((wordList[currentIndex + 1].AudioOffset + 5000) / 10000) ;
                     }
                     currentIndex++;
-                    currentFillAWord = 0;
                     lastIndex = 0;
                 }
                 //event: BoundaryType: Word  AudioOffset: 50ms  Duration: 00:00:00.2750000 Text: "Enter" TextOffset: 0 WordLength: $5

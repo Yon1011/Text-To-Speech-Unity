@@ -16,6 +16,8 @@ public class TextFader : MonoBehaviour {
 	int currentLetterIndex;
 	float currentCharFadeTime;
 
+	int maxNumberOfLetter = 0;
+
 	void OnEnable() {
 
 		// if( CharLimiter == null )
@@ -43,6 +45,9 @@ public class TextFader : MonoBehaviour {
 	public void SetText(string str)
 	{
 		text.text = str;
+		CharLimiter.NumberOfLetters = 0;
+		PerformAnimation();
+		Debug.Log("set text");
 	}
 
 	public void PerformAnimation() {
@@ -50,7 +55,15 @@ public class TextFader : MonoBehaviour {
 		currentCharFadeTime = 0.0f;
 	}
 
+	bool isNeedToUpdate = false;
+	public void SetNumberOfLetters(int num)
+	{
+		maxNumberOfLetter = num;
+		isNeedToUpdate = true;
+	}
+
 	void Update() {
+		if (!isNeedToUpdate) return;
 
 		if( IgnoreWhiteSpaces )
 		{
@@ -67,8 +80,11 @@ public class TextFader : MonoBehaviour {
 				return;
 			}
 		}
-
-		CharLimiter.NumberOfLetters = currentLetterIndex + 1;
+		
+		if (currentLetterIndex <= maxNumberOfLetter)
+		{
+			CharLimiter.NumberOfLetters = currentLetterIndex + 1;
+		}
 
 		currentCharFadeTime += Time.deltaTime;
 		float progress = currentCharFadeTime / CharFadeDuration;
@@ -76,13 +92,16 @@ public class TextFader : MonoBehaviour {
 		if( progress >= 1.0f )
 		{
 			CharFader.SetCharAlpha( currentLetterIndex, 255 );
-
 			currentLetterIndex++;
 			currentCharFadeTime = 0.0f;
+			if (currentLetterIndex >= maxNumberOfLetter)
+			{
+				isNeedToUpdate = false;
+			}
 
 			if( currentLetterIndex >= text.text.Length )
 			{
-				enabled = false;
+			//	enabled = false;
 			}
 		}
 		else
