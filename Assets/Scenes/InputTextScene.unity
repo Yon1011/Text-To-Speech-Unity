@@ -328,6 +328,9 @@ MonoBehaviour:
   audioSource: {fileID: 547868382}
   textHighlight: {fileID: 821508341}
   textUnder: {fileID: 115746474}
+  m_audio: {fileID: 8300000, guid: aba846e1d2bd2d9418ab99b3af1a4686, type: 3}
+  m_ssml: {fileID: 4900000, guid: 5fac16375a84b244497d08c3c36604c4, type: 3}
+  m_textAsset: {fileID: 4900000, guid: 5d8978a4858c47841b060435fb8387f0, type: 3}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,7 +897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f39c5fa5c734eb4b9fa5396e107b9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NumberOfLetters: -1
+  m_NumberOfLetters: 0
 --- !u!114 &821508340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,7 +924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IgnoreWhiteSpaces: 1
   StartOnEnable: 0
-  CharFadeDuration: 0.5
+  CharFadeDuration: 0.05
   CharLimiter: {fileID: 821508339}
   CharFader: {fileID: 821508340}
 --- !u!1 &1063444685

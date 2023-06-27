@@ -47,7 +47,6 @@ public class TextFader : MonoBehaviour {
 		text.text = str;
 		CharLimiter.NumberOfLetters = 0;
 		PerformAnimation();
-		Debug.Log("set text");
 	}
 
 	public void PerformAnimation() {

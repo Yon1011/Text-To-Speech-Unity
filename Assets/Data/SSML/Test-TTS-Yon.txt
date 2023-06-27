@@ -1,0 +1,42 @@
+<!--ID=B7267351-473F-409D-9765-754A8EBCDE05;Version=1|{"VoiceNameToIdMapItems":[{"Id":"e0638b39-fbd2-4497-a482-e2f65759412a","Name":"Microsoft Server Speech Text to Speech Voice (en-US, GuyNeural)","ShortName":"en-US-GuyNeural","Locale":"en-US","VoiceType":"StandardVoice"},{"Id":"b5f86142-ce84-4483-8142-45db0d778add","Name":"Microsoft Server Speech Text to Speech Voice (en-US, DavisNeural)","ShortName":"en-US-DavisNeural","Locale":"en-US","VoiceType":"StandardVoice"}]}-->
+<!--ID=FCB40C2B-1F9F-4C26-B1A1-CF8E67BE07D1;Version=1|{"Files":{}}-->
+<!--ID=5B95B1CC-2C7B-494F-B746-CF22A0E779B7;Version=1|{"Locales":{"en-US":{"AutoApplyCustomLexiconFiles":[{}]}}}-->
+<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
+<voice name="en-US-GuyNeural">
+<s />
+<mstts:express-as style="hopeful">Once upon a time, there was a little mermaid named Ariel who lived under the sea with her father King Triton and her sisters.</mstts:express-as>
+<s />
+<mstts:express-as style="friendly">She loved to explore the ocean and collect human things that she found on the seafloor. She had a secret cave where she kept all her treasures, such as forks, mirrors, books, and a statue of a handsome prince.</mstts:express-as>
+<s />
+</voice>
+<voice name="en-US-DavisNeural">
+<s />
+<mstts:express-as style="hopeful">One day, she saw a big ship sailing on the surface of the water. She was curious and swam closer to take a look. She saw many people on board, dancing and singing. She also saw the prince that she had a statue of. He was even more handsome in real life. She fell in love with him at first sight.</mstts:express-as>
+<s />
+<mstts:express-as style="sad">But then, a storm came and the ship was hit by lightning. The ship started to sink and the prince fell into the water. Ariel swam to him and saved him from drowning. She brought him to the shore and sang to him until he woke up. He opened his eyes and saw her face. He smiled and thanked her for saving his life.</mstts:express-as>
+<s />
+<mstts:express-as style="angry">But before they could talk more, Ariel heard her father's voice calling her name. He had found out that she had gone to the surface and was very angry. He told her to come back to the sea immediately or he would destroy all her human things. Ariel was torn between her love for the prince and her duty to her father. She decided to follow her heart and stay with the prince.</mstts:express-as>
+<s />
+<mstts:express-as style="cheerful">She made a deal with a sea witch named Ursula, who promised to give her legs in exchange for her voice. Ariel agreed and signed a contract with her blood. She lost her voice and became a human girl. She walked to the prince's palace and met him again. He recognized her as the girl who saved him and invited her to stay with him.</mstts:express-as>
+<s />
+<mstts:express-as style="calm">They spent many days together and fell more in love with each other. The prince wanted to marry Ariel, but he also wanted to hear her voice. He asked her to sing for him, but she couldn't. She tried to explain with gestures, but he didn't understand.</mstts:express-as>
+<s />
+<mstts:express-as style="surprised">Then, Ursula appeared in disguise as a human girl named Vanessa. She had stolen Ariel's voice and used it to enchant the prince. She told him that she was the one who saved him from the shipwreck and that he should marry her instead of Ariel.</mstts:express-as>
+<s />
+<mstts:express-as style="disgusted">The prince believed her and agreed to marry Vanessa. He forgot all about Ariel and left her heartbroken. Ariel's friends, a crab named Sebastian and a fish named Flounder, tried to help her stop the wedding.</mstts:express-as>
+<s />
+</voice>
+<voice name="en-US-GuyNeural">
+<s />
+<mstts:express-as style="excited">They managed to break Ursula's spell and restore Ariel's voice. The prince heard her singing and realized that she was his true love. He ran to her and kissed her passionately.</mstts:express-as>
+<s />
+<mstts:express-as style="fearful">But then, Ursula revealed her true form and attacked them. She grabbed Ariel and dragged her into the sea. She said that Ariel had broken the contract and that she belonged to her now.</mstts:express-as>
+<s />
+<mstts:express-as style="proud">The prince followed them and fought with Ursula. He used a harpoon to stab her in the heart and killed her. He freed Ariel and brought her back to the shore.</mstts:express-as>
+<s />
+<mstts:express-as style="happy">They hugged each other and declared their love. King Triton saw how much they loved each other and decided to let Ariel go. He used his magic to give her legs permanently and bless their union.</mstts:express-as>
+<s />
+<mstts:express-as style="joyful">Ariel and the prince got married and lived happily ever after.</mstts:express-as>
+<s />
+</voice>
+</speak>
