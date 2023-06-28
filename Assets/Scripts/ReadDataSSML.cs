@@ -52,6 +52,8 @@ public class ReadDataSSML : MonoBehaviour
     private int currentFillAWord = 0;
     private int lastIndex = 0;
 
+    private string currentString = "";
+
     public void ButtonClick()
     {
         lock (threadLocker)
@@ -61,21 +63,6 @@ public class ReadDataSSML : MonoBehaviour
 
         string newMessage = null;
         var startTime = DateTime.Now;
-
-       StringReader myUrl = new StringReader(m_ssmlText.text);
-       StringBuilder myVar = new StringBuilder();
-        using (XmlReader reader = XmlReader.Create(myUrl))
-        {
-            while (reader.Read())
-            {
-                if (reader.Name == "p")
-                {
-                    // I want to get all the TEXT contents from the this node
-                    Console.WriteLine(reader.ReadInnerXml());
-                }
-            }
-        }
-       // Debug.Log(myVar.ToString());
 
         // Starts speech synthesis, and returns once the synthesis is started.
         using (var result = synthesizer.StartSpeakingSsmlAsync(m_ssmlText.text).Result)
@@ -124,7 +111,8 @@ public class ReadDataSSML : MonoBehaviour
                         audioSourceNeedStop = true;
                     }
                 });
-
+            textUnder.text = m_textContent.text;
+            textHighlight.SetText(m_textContent.text);
             audioSource.clip = audioClip;
             audioSource.Play();
             timeStart = DateTime.Now;
@@ -192,13 +180,7 @@ public class ReadDataSSML : MonoBehaviour
                 isStarted = true;
                 currentTimeMS = 0;
                 currentIndex = 0;
-            };
-
-            synthesizer.SynthesisCompleted += (s, e) =>
-            {
-                Debug.Log("End " + e.Result.AudioDuration.TotalMilliseconds + " " + Time.realtimeSinceStartup);
                 wordList.Clear();
-                isStarted = false;
             };
 
             
@@ -213,8 +195,6 @@ public class ReadDataSSML : MonoBehaviour
                 }
                 else
                 {
-                    textUnder.text += e.Text;
-                    textHighlight.SetText(textUnder.text);
                     audioOffset = 0;
                 }
             };
